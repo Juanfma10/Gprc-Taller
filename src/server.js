@@ -24,7 +24,6 @@ async function main() {
     server.addService(proto.ProductService.service, {
       getProducts: getProducts,
       GetProductById: getProductById
-      // Puedes incluir otros métodos aquí
     });
     server.bindAsync('127.0.0.1:50051', grpc.ServerCredentials.createInsecure(), (error, port) => {
       if (error) {
@@ -36,9 +35,9 @@ async function main() {
     });
   }
 
-  // Implementar el método GetProductById
+
 const getProductById = async (call, callback) => {
-    const { id } = call.request; // Obtener el ID del producto del request
+    const { id } = call.request; 
     try {
       const result = await client.query('SELECT Product_ID AS id, Product_Name AS name, Category_ID AS category, Unit_Price AS price FROM Products WHERE Product_ID = $1', [id]);
       if (result.rows.length === 0) {

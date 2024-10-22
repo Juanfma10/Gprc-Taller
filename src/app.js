@@ -6,18 +6,15 @@ const protoLoader = require('@grpc/proto-loader');
 const app = express();
 const PORT = 3000;
 
-// Carga el archivo .proto
 const PROTO_PATH = './service.proto';
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {});
 const northwindProto = grpc.loadPackageDefinition(packageDefinition).products;
 
 // Crea un cliente gRPC
 const client = new northwindProto.ProductService('localhost:50051', grpc.credentials.createInsecure());
-
-// Middleware para servir archivos estáticos
 app.use(express.static('public'));
 
-// Ruta para obtener productos
+// Rutaas
 app.get('/api/products', (req, res) => {
     client.GetProducts({}, (error, response) => {
         if (error) {
