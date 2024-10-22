@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos Northwind</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+    <h2>Buscar Producto por ID</h2>
+    <input type="number" id="product-id" placeholder="ID del producto">
+    <button onclick="fetchProductById()">Buscar</button>
+    <div id="product-detail"></div>
+
+
+    <h1>Productos de Northwind</h1>
+    <ul id="product-list"></ul>
+
+    <script>
+        async function fetchProducts() {
+            try {
+                const response = await axios.get('/api/products');
+                const products = response.data;
+                const productList = document.getElementById('product-list');
+                productList.innerHTML = '';
+
+                products.forEach(product => {
+                    const li = document.createElement('li');
+                    li.textContent = `${product.name} (ID: ${product.id}, Categoría: ${product.category}, Precio: $${product.price})`;
+                    productList.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        }
+
+        async function fetchProductById() {
+            const id = document.getElementById('product-id').value;
+            try {
+                const response = await axios.get(`/api/products/${id}`);
+                const product = response.data;
+                const productDetail = document.getElementById('product-detail');
+                productDetail.innerHTML = `Producto: ${product.name} (ID: ${product.id}, Categoría: ${product.category}, Precio: $${product.price})`;
+            } catch (error) {
+                console.error('Error fetching product by ID:', error);
+                const productDetail = document.getElementById('product-detail');
+                productDetail.innerHTML = 'Producto no encontrado.';
+            }
+        }
+
+        // Llama a la función al cargar la página
+        fetchProducts();
+
+    </script>
+</body>
+</html>

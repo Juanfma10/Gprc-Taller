@@ -1,0 +1,31 @@
+// proto/products.proto
+syntax = "proto3";
+
+package products;
+
+service ProductService {
+  rpc GetProducts (GetProductsRequest) returns (GetProductsResponse);
+  rpc GetProductById (GetProductByIdRequest) returns (GetProductByIdResponse);
+}
+
+
+message GetProductByIdRequest {
+  int32 id = 1; // ID del producto a buscar
+}
+
+message GetProductByIdResponse {
+  Product product = 1; // Producto encontrado
+}
+
+message GetProductsRequest {}
+
+message GetProductsResponse {
+  repeated Product products = 1;
+}
+
+message Product {
+  int32 id = 1;
+  string name = 2;
+  string category = 3;
+  double price = 4;
+}
