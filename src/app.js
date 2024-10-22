@@ -1,8 +1,6 @@
 const express = require('express');
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
-
-// Configura Express
 const app = express();
 const PORT = 3000;
 
