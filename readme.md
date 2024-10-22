@@ -3,9 +3,9 @@ informacion obtenida de: https://github.com/pthom/northwind_psql
 
 iniciar servidor gprc
 
-node src/server.js
+  node src/server.js
 
 iniciar cliente 
 
-node src/app.js
+  node src/app.js
 
