@@ -1,16 +1,9 @@
 const express = require('express');
-const grpc = require('@grpc/grpc-js');
-const protoLoader = require('@grpc/proto-loader');
+const client = require('./client');
 const app = express();
-const PORT = 3000;
+const PORT = 5555;
 
-const PROTO_PATH = './service.proto';
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, {});
-const northwindProto = grpc.loadPackageDefinition(packageDefinition).products;
-
-// Crea un cliente gRPC
-const client = new northwindProto.ProductService('localhost:50051', grpc.credentials.createInsecure());
-app.use(express.static('public'));
+app.use(express.static('./src/public'));
 
 // Rutaas
 app.get('/api/products', (req, res) => {

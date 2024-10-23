@@ -7,6 +7,8 @@ service ProductService {
   rpc GetProductById (GetProductByIdRequest) returns (GetProductByIdResponse);
 }
 
+message Empty {
+}
 
 message GetProductByIdRequest {
   int32 id = 1; // ID del producto a buscar

@@ -3,7 +3,7 @@ const protoLoader = require('@grpc/proto-loader');
 const { Client } = require('pg');
 
 
-const packageDefinition = protoLoader.loadSync('service.proto', {});
+const packageDefinition = protoLoader.loadSync('./src/service.proto', {});
 const proto = grpc.loadPackageDefinition(packageDefinition).products;
 
 
